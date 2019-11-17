@@ -38,4 +38,14 @@ public class UserServiceImp implements swd.SWDProject.service.imp.UserService {
         }
     }
 
+    @Override
+    public User getUserByUserName(String username) {
+        try {
+            User user = userRepository.findUserByUsername(username);
+            return user;
+        }finally {
+
+        }
+    }
+
 }
