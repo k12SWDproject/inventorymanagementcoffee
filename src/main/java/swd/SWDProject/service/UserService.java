@@ -1,13 +1,13 @@
-package swd.SWDProject.service.imp;
+package swd.SWDProject.service;
 
 import swd.SWDProject.entity.User;
 
 public interface UserService {
 
-    public String getRoleByUserNameAndPassword(String username, String password);
+    String getRoleByUserNameAndPassword(String username, String password);
 
-    public User createUser(User user);
+    User createUser(User user);
 
-    public User getUserByUserName(String username);
+    User getUserByUserName(String username);
 
 }

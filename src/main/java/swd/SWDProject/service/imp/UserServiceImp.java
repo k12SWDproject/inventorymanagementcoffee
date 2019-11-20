@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class UserServiceImp implements swd.SWDProject.service.imp.UserService {
+public class UserServiceImp implements swd.SWDProject.service.UserService {
 
     @Autowired
     UserRepository userRepository;

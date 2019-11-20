@@ -1,6 +1,7 @@
 package swd.SWDProject.controller;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import swd.SWDProject.constant.StringRS;
 import swd.SWDProject.entity.User;
-import swd.SWDProject.service.imp.UserService;
+import swd.SWDProject.service.UserService;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -24,10 +27,11 @@ public class UserController {
     @PostMapping("/create")
     public ResponseEntity createAccount(@RequestBody User user) {
         try{
+            log.info(StringRS.BEGIN_CONTROLLER+"createAccount");
             User createdUser = userService.createUser(user);
             return new ResponseEntity(createdUser, HttpStatus.OK);
         }finally {
-
+            log.info(StringRS.END_CONTROLLER+"createAccount");
         }
     }
 //
@@ -35,10 +39,11 @@ public class UserController {
     @GetMapping("/{username}")
     public ResponseEntity getUser(@PathVariable String username) {
         try{
+            log.info(StringRS.BEGIN_CONTROLLER+"createAccount");
             User user = userService.getUserByUserName(username);
             return new ResponseEntity(user, HttpStatus.OK);
         }finally {
-
+            log.info(StringRS.END_CONTROLLER+"createAccount");
         }
     }
 

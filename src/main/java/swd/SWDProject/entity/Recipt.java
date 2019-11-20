@@ -25,5 +25,4 @@ public class Recipt {
     private int status;
     private int houseId;
     private String description;
-
 }

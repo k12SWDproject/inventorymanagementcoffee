@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="swd.SWDProject.repository.mybatis.HouseReceiptMapper">
+    <resultMap
+            id="receiptMiniDetail" type="swd.SWDProject.dto.ReceiptMiniDetailDTO">
+        <result column="RECEIPTID" property="receiptId" />
+        <result column="RECEIPTNAME" property="receiptName" />
+        <result column="TOTAL" property="total" />
+        <result column="QUANTITY" property="quantity" />
+        <result column="STATUS" property="status" />
+    </resultMap>
+
+    <select id="getHouseReceiptByUsernameAndType" parameterType="java.util.Map" resultMap="receiptMiniDetail">
+       SELECT
+            R.ID AS RECEIPTID,
+            R.TITLE AS RECEIPTNAME,
+            RD.TOTAL AS TOTAL,
+            RD.QUANTITY AS QUANTITY,
+            R.STATUS AS STATUS
+        FROM
+            [USER] U
+        INNER JOIN HOUSE ON
+            U.HOUSE_ID = HOUSE.ID
+        INNER JOIN RECEIPT R ON
+            R.HOUSEID = HOUSE.ID
+        INNER JOIN RECEIPTDETAIL RD ON
+            RD.RECEIPTID = R.ID
+        INNER JOIN UTILITYSERVICE US ON
+            RD.UTILITYSERVICEID = US.ID
+        WHERE
+            US.UTILSRVCATID = #{type}
+            AND USERNAME = #{username};
+    </select>
+</mapper>
