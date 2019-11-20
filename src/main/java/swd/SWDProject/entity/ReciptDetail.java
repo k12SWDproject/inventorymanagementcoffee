@@ -1,5 +1,6 @@
 package swd.SWDProject.entity;
 
+
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -14,14 +15,15 @@ import java.util.Date;
 @Builder
 @Getter
 @Setter
-@Table(name = "UtilityService")
-public class UtilityService {
+@Table(name = "ReceiptDetail")
+public class ReciptDetail {
     @Id
-    private int id;
-    private String name;
+    private int Id;
+    private BigDecimal total;
+    private int unitPrice;
+    private int quantity;
+    private int utilityServiceId;
     private Date createDate;
     private Date lastMotified;
-    private BigDecimal price;
-    private int type;
-    private int utilSrvCatId;
+    private int receiptId;
 }
