@@ -7,8 +7,8 @@ import swd.SWDProject.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
 
-    public String getRoleByPasswordAndUsername(String password, String userName);
+     String getRoleByPasswordAndUsername(String password, String userName);
 
-    public User findUserByUsername(String username);
+     User findUserByUsername(String username);
 
 }

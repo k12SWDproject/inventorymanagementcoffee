@@ -3,6 +3,7 @@ package swd.SWDProject.entity;
 
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -16,7 +17,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "ReceiptDetail")
-public class ReciptDetail {
+public class ReceiptDetail {
     @Id
     private int Id;
     private BigDecimal total;
@@ -24,6 +25,7 @@ public class ReciptDetail {
     private int quantity;
     private int utilityServiceId;
     private Date createDate;
-    private Date lastMotified;
-    private int receiptId;
+    private Date lastModified;
+    @Column(name = "RECEIPT_ID")
+    private  int receiptId;
 }
