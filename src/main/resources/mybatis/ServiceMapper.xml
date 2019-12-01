@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="swd.SWDProject.repository.mybatis.ServiceMapper">
+
+    <resultMap id="serviceDTO" type="swd.SWDProject.model.ServiceDTO">
+        <result column="SERVICE_NAME" property="name" />
+        <result column="SERVICE_PRICE" property="price" />
+        <result column="SERVICE_CATO_ID" property="type" />
+        <result column="SERVICE_CATO_NAME" property="catogeryName" />
+        <result column="IMAGE" property="image" />
+
+    </resultMap>
+
+    <select id="getServices" parameterType="java.util.Map" resultMap="serviceDTO">
+        SELECT
+            U.NAME AS SERVICE_NAME,
+            U.PRICE AS SERVICE_PRICE,
+            UC.ID AS SERVICE_CATO_ID,
+            UC.NAME AS SERVICE_CATO_NAME,
+            U.IMAGE AS IMAGE
+        FROM
+            UTILITYSERVICE U
+        INNER JOIN [UTILSERVICECATE RY] UC ON
+            U.UTILSRVCATID = UC.ID
+        WHERE
+        0=0
+        <if test="catogeryId != 0">
+            AND UC.ID = #{catogeryid}
+        </if>
+        <if test="serviceid != 0">
+            AND   U.ID = #{serviceid}
+        </if>
+        ;
+    </select>
+
+</mapper>

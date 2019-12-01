@@ -108,4 +108,24 @@ public class ReceiptServiceImp implements ReceiptService {
             log.info(StringRS.END_SERVICE + "getReceipt");
         }
     }
+
+    @Override
+    public Receipt paymentReceipt(int id) throws Exception {
+        try {
+            log.info(StringRS.BEGIN_SERVICE + "paymentReceipt");
+            Receipt receipt = null;
+            receipt = receiptRepository.getOne(id);
+
+            if(receipt == null) {
+                throw new Exception("Receipt is not exits");
+            }
+
+            receipt.setStatus(0);
+            receiptRepository.save(receipt);
+
+            return receipt;
+        }finally {
+            log.info(StringRS.END_SERVICE + "paymentReceipt");
+        }
+    }
 }

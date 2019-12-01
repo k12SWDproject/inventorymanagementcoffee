@@ -7,7 +7,6 @@ import lombok.Setter;
 import swd.SWDProject.entity.Receipt;
 import swd.SWDProject.entity.ReceiptDetail;
 
-import java.util.Date;
 import java.util.List;
 
 @Getter

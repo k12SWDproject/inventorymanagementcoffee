@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import swd.SWDProject.constant.StringRS;
@@ -34,6 +36,7 @@ public class ReceiptController {
             log.info(StringRS.END_CONTROLLER+"getListReceiptOfUser");
         }
     }
+
     @GetMapping
     public ResponseEntity<ReceiptDTO> getReceipt(String filter) throws JsonProcessingException {
         try{
@@ -42,6 +45,18 @@ public class ReceiptController {
             return new ResponseEntity<>(receipt,HttpStatus.OK);
         }finally {
             log.info(StringRS.END_CONTROLLER+"getListReceipt");
+        }
+    }
+
+    @PutMapping(value = "/{id}/status")
+    public ResponseEntity<Receipt> payReceipt(@PathVariable int id) {
+        try {
+            log.info(StringRS.BEGIN_CONTROLLER + "payReceipt");
+            Receipt receipt = null;
+
+            return ResponseEntity.ok(receipt);
+        } finally {
+            log.info(StringRS.END_CONTROLLER + "payReceipt");
         }
     }
 
