@@ -48,4 +48,7 @@ public class User {
     private Date lastModified;
     private Integer status;
     private BigDecimal money;
+    private String email;
+    @Column(name = "USER_GG_ID")
+    private String userGGId;
 }

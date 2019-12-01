@@ -15,6 +15,8 @@ import swd.SWDProject.constant.StringRS;
 import swd.SWDProject.entity.User;
 import swd.SWDProject.service.UserService;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequestMapping("/api/users")
@@ -45,5 +47,19 @@ public class UserController {
             log.info(StringRS.END_CONTROLLER+"createAccount");
         }
     }
+
+    @GetMapping
+    public ResponseEntity getUsers(String filter) {
+        try {
+            log.info(StringRS.BEGIN_CONTROLLER + "getUsers");
+            List<User> rs = null;
+
+            return ResponseEntity.ok(rs);
+        } finally {
+            log.info(StringRS.END_CONTROLLER + "getUsers");
+        }
+    }
+
+
 
 }

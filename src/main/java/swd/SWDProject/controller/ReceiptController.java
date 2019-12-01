@@ -52,9 +52,11 @@ public class ReceiptController {
     public ResponseEntity<Receipt> payReceipt(@PathVariable int id) {
         try {
             log.info(StringRS.BEGIN_CONTROLLER + "payReceipt");
-            Receipt receipt = null;
+            Receipt receipt = receiptService.paymentReceipt(id);
 
             return ResponseEntity.ok(receipt);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
         } finally {
             log.info(StringRS.END_CONTROLLER + "payReceipt");
         }
