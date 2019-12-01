@@ -121,7 +121,7 @@ public class ReceiptServiceImp implements ReceiptService {
             }
 
             receipt.setStatus(0);
-            receiptRepository.save(receipt);
+           receipt = receiptRepository.save(receipt);
 
             return receipt;
         }finally {
