@@ -11,9 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class UserFilter {
+public class ProductFilter {
 
-    private String email;
-    private int houseId;
+    private String name;
 
 }

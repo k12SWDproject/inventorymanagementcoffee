@@ -11,33 +11,33 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import swd.SWDProject.constant.StringRS;
-import swd.SWDProject.model.ServiceDTO;
+import swd.SWDProject.entity.Product;
 import swd.SWDProject.service.HouseService;
-import swd.SWDProject.service.ServiceService;
+import swd.SWDProject.service.ProductService;
 
 import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/houses")
-public class HouseController {
+@RequestMapping("/api/products")
+public class ProductController {
 
     @Autowired
-    HouseService houseService;
+    ProductService productService;
 
-    @PutMapping(value = "/member/{username}")
-    public ResponseEntity addMemberToHouse(@PathVariable String username) {
+    @GetMapping
+    public ResponseEntity getProducts(String filter) {
         try {
-            log.info(StringRS.BEGIN_CONTROLLER + "addMemberToHouse");
+            log.info(StringRS.BEGIN_CONTROLLER+ "getProduct");
+            List<Product> products = productService.getProducts(filter);
 
-            houseService.addMemberToHouse(username);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.badRequest().build();
+            return  ResponseEntity.ok(products);
+        } catch (JsonProcessingException e) {
+            return  ResponseEntity.badRequest().build();
         } finally {
-            log.info(StringRS.BEGIN_CONTROLLER + "addMemberToHouse");
+            log.info(StringRS.END_CONTROLLER+ "getProduct");
         }
     }
+
 
 }

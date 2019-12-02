@@ -49,6 +49,7 @@ public class User {
     private Integer status;
     private BigDecimal money;
     private String email;
+    private int familyLevel;
     @Column(name = "USER_GG_ID")
     private String userGGId;
 }

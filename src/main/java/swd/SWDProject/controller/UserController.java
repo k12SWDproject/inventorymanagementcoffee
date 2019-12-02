@@ -1,6 +1,7 @@
 package swd.SWDProject.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,8 +54,11 @@ public class UserController {
         try {
             log.info(StringRS.BEGIN_CONTROLLER + "getUsers");
             List<User> rs = null;
-
+            rs = userService.getUsers(filter);
             return ResponseEntity.ok(rs);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
         } finally {
             log.info(StringRS.END_CONTROLLER + "getUsers");
         }
