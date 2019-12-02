@@ -21,6 +21,7 @@ import swd.SWDProject.service.UserService;
 import swd.SWDProject.service.model.ReceiptDTO;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,7 +103,7 @@ public class ReceiptServiceImp implements ReceiptService {
             ReciptFilter reciptFilter = objectMapper.readValue(filter, ReciptFilter.class);
             Receipt receipt = receiptRepository.findReceiptById(reciptFilter.getId());
             List<ReceiptDetail> receiptDetailList = receiptDetailRepository.findReceiptDetailsByReceiptId(reciptFilter.getId());
-            return new ReceiptDTO(receipt,receiptDetailList);
+            return new ReceiptDTO(receipt, receiptDetailList);
 
         } finally {
             log.info(StringRS.END_SERVICE + "getReceipt");
@@ -116,15 +117,16 @@ public class ReceiptServiceImp implements ReceiptService {
             Receipt receipt = null;
             receipt = receiptRepository.getOne(id);
 
-            if(receipt == null) {
+            if (receipt == null) {
                 throw new Exception("Receipt is not exits");
             }
 
             receipt.setStatus(0);
-           receipt = receiptRepository.save(receipt);
+            receipt.setPaymentDate(new Date());
+            receipt = receiptRepository.save(receipt);
 
             return receipt;
-        }finally {
+        } finally {
             log.info(StringRS.END_SERVICE + "paymentReceipt");
         }
     }
