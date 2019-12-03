@@ -15,6 +15,7 @@ import swd.SWDProject.entity.User;
 import swd.SWDProject.filter.ReciptFilter;
 import swd.SWDProject.repository.ReceiptDetailRepository;
 import swd.SWDProject.repository.ReceiptRepository;
+import swd.SWDProject.repository.UserRepository;
 import swd.SWDProject.repository.mybatis.HouseReceiptMapper;
 import swd.SWDProject.service.ReceiptService;
 import swd.SWDProject.service.UserService;
@@ -41,6 +42,9 @@ public class ReceiptServiceImp implements ReceiptService {
     ReceiptDetailRepository receiptDetailRepository;
     @Autowired
     HouseReceiptMapper houseReceiptMapper;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Override
     public HouseReceiptDTO getHouseReceiptByType(String type) {
@@ -123,7 +127,17 @@ public class ReceiptServiceImp implements ReceiptService {
 
             receipt.setStatus(0);
             receipt.setPaymentDate(new Date());
+
+            User user = userService.getUserByUserName(JWTVerifier.USERNAME);
+
+            List<ReceiptDetail> receiptDetails = receiptDetailRepository.findReceiptDetailsByReceiptId(id);
+
+            if (user.getMoney().compareTo(receiptDetails.get(0).getTotal()) == -1) {
+                throw new Exception();
+            }
+            user.setMoney(user.getMoney().subtract(receiptDetails.get(0).getTotal()));
             receipt = receiptRepository.save(receipt);
+            userRepository.save(user);
 
             return receipt;
         } finally {
