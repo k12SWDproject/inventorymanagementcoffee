@@ -8,16 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import swd.SWDProject.constant.StringRS;
 import swd.SWDProject.entity.Order;
 import swd.SWDProject.filter.OrderFilter;
 import swd.SWDProject.model.OrderDTO;
+import swd.SWDProject.model.OrderDetailRequestDTO;
+import swd.SWDProject.model.OrderRequestDTO;
 import swd.SWDProject.service.HouseService;
 import swd.SWDProject.service.OrderService;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Slf4j
@@ -33,7 +40,7 @@ public class OrderController {
         try {
             log.info(StringRS.BEGIN_CONTROLLER + "Get Ordes");
 
-            List<OrderDTO>  ordes = orderService.getOrders(filter);
+            List<OrderDTO> ordes = orderService.getOrders(filter);
 
             return ResponseEntity.ok(ordes);
         } catch (JsonProcessingException e) {
@@ -48,7 +55,7 @@ public class OrderController {
         try {
             log.info(StringRS.BEGIN_CONTROLLER + "Get Ordes");
 
-            List<OrderDTO>  ordes = orderService.getMyOrders(filter);
+            List<OrderDTO> ordes = orderService.getMyOrders(filter);
 
             return ResponseEntity.ok(ordes);
         } catch (JsonProcessingException e) {
@@ -58,4 +65,17 @@ public class OrderController {
         }
     }
 
+    @PostMapping
+    public ResponseEntity paymentOrders(@RequestBody OrderDetailRequestDTO orderRequest) {
+        try {
+            log.info(StringRS.BEGIN_CONTROLLER + "paymentOrders");
+            OrderDTO order = orderService.paymentOrders(orderRequest.getOrderRequest());
+            return ResponseEntity.ok(order);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return ResponseEntity.badRequest().build();
+        } finally {
+            log.info(StringRS.BEGIN_CONTROLLER + "paymentOrders");
+        }
+    }
 }

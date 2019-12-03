@@ -28,6 +28,6 @@ public class Product {
     private int id;
     private String name;
     private String image;
-    private BigInteger price;
+    private int price;
     private int quantity;
 }

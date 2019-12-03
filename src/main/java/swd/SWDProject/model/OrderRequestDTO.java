@@ -5,9 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import swd.SWDProject.entity.Order;
-
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,8 +12,7 @@ import java.util.List;
 @Setter
 @Builder
 
-public class OrderDTO {
-
-    private Order order;
-    private List<OrderDetailDTO> orderDetail;
+public class OrderRequestDTO {
+    private int id;
+    private int quantity;
 }
