@@ -66,10 +66,10 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity paymentOrders(@RequestBody OrderDetailRequestDTO orderRequest) {
+    public ResponseEntity paymentOrders(@RequestBody List<OrderRequestDTO> orderRequest) {
         try {
             log.info(StringRS.BEGIN_CONTROLLER + "paymentOrders");
-            OrderDTO order = orderService.paymentOrders(orderRequest.getOrderRequest());
+            OrderDTO order = orderService.paymentOrders(orderRequest);
             return ResponseEntity.ok(order);
         } catch (Exception e) {
             log.error(e.getMessage());
