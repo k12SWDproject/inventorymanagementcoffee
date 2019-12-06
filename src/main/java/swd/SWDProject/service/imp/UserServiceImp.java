@@ -85,6 +85,13 @@ public class UserServiceImp implements swd.SWDProject.service.UserService {
                     }
                 });
             }
+
+            if (userFilter.getEmail() != null) {
+                list.add(((root, criteriaQuery, criteriaBuilder) -> {
+                    return criteriaBuilder.equal(root.get(User_.username), userFilter.getEmail());
+                }));
+            }
+            
             users = userRepository.findAll(SpecificationBuilder.build(list));
 
             return users;

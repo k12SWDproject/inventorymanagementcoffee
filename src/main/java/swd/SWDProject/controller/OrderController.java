@@ -72,7 +72,7 @@ public class OrderController {
             OrderDTO order = orderService.paymentOrders(orderRequest);
             return ResponseEntity.ok(order);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            e.printStackTrace();
             return ResponseEntity.badRequest().build();
         } finally {
             log.info(StringRS.BEGIN_CONTROLLER + "paymentOrders");

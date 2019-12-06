@@ -19,6 +19,7 @@ import swd.SWDProject.model.OrderDTO;
 import swd.SWDProject.model.OrderDetailDTO;
 import swd.SWDProject.model.OrderRequestDTO;
 import swd.SWDProject.repository.OrderRepository;
+import swd.SWDProject.repository.ProductOrderRepository;
 import swd.SWDProject.repository.ProductRepository;
 import swd.SWDProject.repository.UserRepository;
 import swd.SWDProject.repository.mybatis.OrderMapper;
@@ -49,6 +50,9 @@ public class OrderServiceImp implements swd.SWDProject.service.OrderService {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    ProductOrderRepository productOrderRepository;
 
     @Override
     public List<OrderDTO> getOrders(String filter) throws JsonProcessingException {
@@ -155,6 +159,7 @@ public class OrderServiceImp implements swd.SWDProject.service.OrderService {
 
             Order newOrder = Order.builder().userId(user.getId()).total(new BigInteger(sum+""))
                     .createDate(new Date()).build();
+
             newOrder = orderRepository.save(newOrder);
             //create order detail
 
@@ -163,6 +168,8 @@ public class OrderServiceImp implements swd.SWDProject.service.OrderService {
                 return ProductOrder.builder().orderId(finalNewOrder.getId()).productId(item.getId())
                         .quantity(item.getQuantity()).build();
             }).collect(Collectors.toList());
+
+            productOrderRepository.saveAll(productOrders);
 
             //update user account
             user.setMoney(user.getMoney().subtract(new BigDecimal(sum+"")));
