@@ -35,4 +35,7 @@ public class Order {
     private BigInteger total;
     @Column(name = "USER_ID")
     private int userId;
+
+    @Column(name = "STATUS")
+    private int status;
 }
