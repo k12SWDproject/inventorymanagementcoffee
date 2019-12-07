@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PutMapping;
 import swd.SWDProject.constant.StringRS;
+import swd.SWDProject.dto.UserUpdateDTO;
 import swd.SWDProject.entity.House;
 import swd.SWDProject.entity.House_;
 import swd.SWDProject.entity.SpecificationBuilder;
@@ -98,6 +99,24 @@ public class UserServiceImp implements swd.SWDProject.service.UserService {
         }finally {
             log.info(StringRS.END_SERVICE + "getUsers");
 
+        }
+    }
+
+    @Override
+    public User updateUser(UserUpdateDTO userUpdateDTO) throws Exception {
+        try {
+            log.info( StringRS.BEGIN_SERVICE + "update UserService");
+            User user = userRepository.findUserByUsername(userUpdateDTO.getEmail());
+            if(user == null) {
+                throw new Exception();
+            }
+            user.setDateOfBirth(userUpdateDTO.getBirthDay());
+            user.setFullName(userUpdateDTO.getFullname());
+            user.setGender(userUpdateDTO.getGender());
+            User rs = userRepository.save(user);
+            return  rs;
+        }finally {
+            log.info( StringRS.END_SERVICE + "update UserService");
         }
     }
 

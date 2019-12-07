@@ -46,7 +46,7 @@ public class HouseController {
         try {
             log.info(StringRS.BEGIN_CONTROLLER + "addMemberToHouse");
 
-            houseService.addMemberToHouse(username);
+            houseService.deleteMemberToHouse(username);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             e.printStackTrace();

@@ -9,10 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import swd.SWDProject.constant.StringRS;
+import swd.SWDProject.dto.UserUpdateDTO;
 import swd.SWDProject.entity.User;
 import swd.SWDProject.service.UserService;
 
@@ -33,6 +35,20 @@ public class UserController {
             User createdUser = userService.createUser(user);
             return new ResponseEntity(createdUser, HttpStatus.OK);
         }finally {
+            log.info(StringRS.END_CONTROLLER+"createAccount");
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity updateUser(@RequestBody UserUpdateDTO userupdateDTO) {
+        try{
+            log.info(StringRS.BEGIN_CONTROLLER+"createAccount");
+            User createdUser = userService.updateUser(userupdateDTO);
+            return new ResponseEntity(createdUser, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().build();
+        } finally {
             log.info(StringRS.END_CONTROLLER+"createAccount");
         }
     }

@@ -1,6 +1,7 @@
 package swd.SWDProject.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import swd.SWDProject.dto.UserUpdateDTO;
 import swd.SWDProject.entity.User;
 
 import java.util.List;
@@ -14,5 +15,7 @@ public interface UserService {
     User getUserByUserName(String username);
 
     List<User> getUsers(String filter) throws JsonProcessingException;
+
+    User updateUser(UserUpdateDTO userUpdateDTO) throws Exception;
 
 }
