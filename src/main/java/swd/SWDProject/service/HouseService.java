@@ -9,4 +9,6 @@ public interface HouseService {
 
     void addMemberToHouse(String username) throws Exception;
 
+    void deleteMemberToHouse(String username) throws Exception;
+
 }

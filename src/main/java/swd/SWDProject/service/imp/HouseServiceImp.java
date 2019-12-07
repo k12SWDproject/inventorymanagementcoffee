@@ -52,4 +52,31 @@ public class HouseServiceImp implements swd.SWDProject.service.HouseService {
             log.info(StringRS.BEGIN_SERVICE + "addMemberToHouse");
         }
     }
+
+    @Override
+    public void deleteMemberToHouse(String username) throws Exception {
+        try {
+            log.info(StringRS.BEGIN_SERVICE + "deleteMemberToHouse");
+
+            User user = userRepository.findUserByUsername(JWTVerifier.USERNAME);
+
+            if( user.getFamilyLevel() != 1) {
+                throw new Exception();
+            }
+
+            User member = userRepository.findUserByUsername(username);
+
+            if( member == null) {
+                throw new Exception();
+            }
+
+            member.setFamilyLevel(0);
+            member.setHouse(null);
+
+            userRepository.save(member);
+
+        } finally {
+            log.info(StringRS.BEGIN_SERVICE + "deleteMemberToHouse");
+        }
+    }
 }
