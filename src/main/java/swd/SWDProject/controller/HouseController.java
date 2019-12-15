@@ -8,10 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import swd.SWDProject.constant.StringRS;
+import swd.SWDProject.entity.House;
 import swd.SWDProject.model.ServiceDTO;
 import swd.SWDProject.service.HouseService;
 import swd.SWDProject.service.ServiceService;
@@ -53,6 +57,26 @@ public class HouseController {
             return ResponseEntity.badRequest().build();
         } finally {
             log.info(StringRS.BEGIN_CONTROLLER + "addMemberToHouse");
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity getAll(@RequestParam String filter) {
+        try{
+            List<House> houses =null;
+            return ResponseEntity.ok(houses);
+        } finally {
+
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity addHouse(@RequestBody House house) {
+        try{
+            House house1 = null;
+            return ResponseEntity.ok(house1);
+        } finally {
+
         }
     }
 

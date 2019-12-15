@@ -12,7 +12,9 @@ import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.service.contexts.SecurityContext;
+import swd.SWDProject.config.FirebaseConfig;
 
+import java.io.IOException;
 import java.util.List;
 
 import static springfox.documentation.builders.PathSelectors.regex;
@@ -45,6 +47,11 @@ public class SwdProjectApplication {
 	}
 
 	public static void main(String[] args) {
+		try {
+			FirebaseConfig.initFirebase();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		SpringApplication.run(SwdProjectApplication.class, args);
 	}
 

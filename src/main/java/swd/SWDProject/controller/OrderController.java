@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import swd.SWDProject.filter.OrderFilter;
 import swd.SWDProject.model.OrderDTO;
 import swd.SWDProject.model.OrderDetailRequestDTO;
 import swd.SWDProject.model.OrderRequestDTO;
+import swd.SWDProject.repository.OrderRepository;
 import swd.SWDProject.service.HouseService;
 import swd.SWDProject.service.OrderService;
 
@@ -34,6 +36,7 @@ public class OrderController {
 
     @Autowired
     OrderService orderService;
+
 
     @GetMapping
     public ResponseEntity getOrders(String filter) {
@@ -78,4 +81,20 @@ public class OrderController {
             log.info(StringRS.BEGIN_CONTROLLER + "paymentOrders");
         }
     }
+
+    @PutMapping
+    public ResponseEntity updateOrder(@RequestBody OrderDTO orderDTO) {
+        try{
+            Order order = null;
+            return ResponseEntity.ok(order);
+        } finally {
+
+        }
+    }
+
+    @DeleteMapping
+    public ResponseEntity deleteOrder (@RequestParam Long id) {
+        return ResponseEntity.ok().build();
+    }
+
 }

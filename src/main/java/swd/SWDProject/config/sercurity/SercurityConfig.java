@@ -1,6 +1,5 @@
 package swd.SWDProject.config.sercurity;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -55,7 +54,7 @@ public class SercurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.GET, "/api/**").permitAll()
 //                .antMatchers(HttpMethod.PUT, "/api/**").permitAll()
 //                .antMatchers(HttpMethod.DELETE, "/api/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/login","/api/user/create").permitAll()
+                .antMatchers(HttpMethod.POST, "/login","/api/user/create","/api/login/google").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTGenerator(authenticationManager()))
