@@ -59,12 +59,17 @@ public class LoginServiceImp implements swd.SWDProject.service.LoginService {
                 );
                 return "";
             } else {
-                String rs =  JWT.create().withSubject(user.getUsername())
-                        .withClaim(AUTHORITIES_KEY, "admin")
-                        .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                        .sign(Algorithm.HMAC512(JWT_SECRET.getBytes()));
-                log.debug(rs);
-                return "Bearer "+ rs;
+                if(user.getHouse() !=null) {
+                    String rs = JWT.create().withSubject(user.getUsername())
+                            .withClaim(AUTHORITIES_KEY, "admin")
+                            .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                            .sign(Algorithm.HMAC512(JWT_SECRET.getBytes()));
+                    log.debug(rs);
+                    return "Bearer " + rs;
+                }else{
+                    return "";
+                }
+
             }
         }finally {
             log.info(StringRS.BEGIN_SERVICE + "login Google Service");
